@@ -37,3 +37,16 @@ select_model <- function(results,NumLags) {
   summary_selec <- apply(is_selected, c(3,2), sum)
 
 }
+
+estimate_Delta <- function(Phi,Sigma,Phi0,Sigma0,m,p,p0,n) {
+
+  H  <- construct_H(Phi,m,p,n)
+  H0 <- construct_H(Phi0,m,p0,n)
+
+  delta <- n*(log(det(Sigma)))+
+           psych::tr((t(H)%*%kronecker(diag(n),solve(Sigma))%*%H)%*%
+                      t(H0)%*%kronecker(diag(n),solve(Sigma0))%*%H0)
+
+  return(delta)
+
+}

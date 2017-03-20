@@ -4,7 +4,7 @@
 \alias{sample_data}
 \title{Generate a random sample of an VAR(p) m-variate time series.}
 \usage{
-sample_data(Phi, Sigma, p, m, n, NumLags)
+sample_data(Phi, Sigma, p, m, n, NumLags, ...)
 }
 \arguments{
 \item{Phi}{Transition Matrix}

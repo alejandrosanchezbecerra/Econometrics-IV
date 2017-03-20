@@ -14,6 +14,7 @@ example1 <- function() {
   config$n         <- 40
   config$Nsim      <- 100
   config$m         <- 2
+  config$p0        <- 1
   config$NumLags   <- 6
 
   return(config)
@@ -38,6 +39,7 @@ example2 <- function() {
   config$n         <- 40
   config$Nsim      <- 100
   config$m         <- 2
+  config$p0        <- 2
   config$NumLags   <- 6
 
   return(config)

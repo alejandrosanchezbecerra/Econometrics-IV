@@ -4,7 +4,7 @@
 \alias{replicate_results}
 \title{Replicate the results in Hurvich and Tsai}
 \usage{
-replicate_results(Phi0, Sigma0, n, Nsim, m, NumLags)
+replicate_results(Phi0, Sigma0, n, Nsim, m, p0, NumLags)
 }
 \arguments{
 \item{Phi0}{A list with p transition matrices of a VAR(p)}

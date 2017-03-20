@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\n\nlibrary(devtools)\ninstall_github(\"alejandrosanchezbecerra/Econometrics-IV/PS5\")",
+    "created" : 1489995357211.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1766434690",
+    "id" : "4B5119F6",
+    "lastKnownWriteTime" : 3419473789575321445,
+    "last_content_update" : 1489995442596,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
