@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: hurvichtsai\nType: Package\nTitle: Replicate Hurvich and Tsai (1993)\nVersion: 0.1.0\nAuthors@R: person(\"Alejandro\", \"Sanchez\", email = \"alesan@sas.upenn.edu\",\n                  role = c(\"aut\", \"cre\"))\nMaintainer: The package maintainer <alesan@sas.upenn.edu>\nDescription: More about what it does (maybe more than one line)\n    Use four spaces when indenting paragraphs within the Description.\nLicense: What license is it under?\nEncoding: UTF-8\nLazyData: true\nRoxygenNote: 5.0.1\n\n\n",
+    "created" : 1489970328745.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3485928879",
+    "id" : "A9DE7D5F",
+    "lastKnownWriteTime" : 1489971892,
+    "last_content_update" : 1489972297783,
+    "path" : "~/GITHUB_FOLDERS/Econometrics-IV/PS5/hurvichtsai/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}

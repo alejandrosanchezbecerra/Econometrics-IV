@@ -1,18 +1,17 @@
-# Hello, world!
-#
-# This is an example function named 'hello' 
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Build and Reload Package:  'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
-
-hello <- function() {
-  print("Hello, world!")
+#' Title
+#'
+#' @param sample_size
+#' @param intercept
+#' @param slope
+#' @param error_sd Standard deviation of the error term
+#'
+#' @return
+#' @export
+#'
+#' @examples
+dgp <- function(sample_size, intercept, slope, error_sd){
+  x <- runif(sample_size)
+  epsilon <- rnorm(sample_size, sd = error_sd)
+  y <- intercept + slope * x + epsilon
+  return(y)
 }
