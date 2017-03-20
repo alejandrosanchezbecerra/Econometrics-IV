@@ -4,7 +4,7 @@
 \alias{example1}
 \title{Title}
 \usage{
-example1()
+example1(Nsim)
 }
 \description{
 Title

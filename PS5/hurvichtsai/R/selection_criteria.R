@@ -38,6 +38,21 @@ select_model <- function(results,NumLags) {
 
 }
 
+#' Title
+#'
+#' @param Phi
+#' @param Sigma
+#' @param Phi0
+#' @param Sigma0
+#' @param m
+#' @param p
+#' @param p0
+#' @param n
+#'
+#' @return
+#' @export
+#'
+#' @examples
 estimate_Delta <- function(Phi,Sigma,Phi0,Sigma0,m,p,p0,n) {
 
   H  <- construct_H(Phi,m,p,n)
@@ -45,7 +60,7 @@ estimate_Delta <- function(Phi,Sigma,Phi0,Sigma0,m,p,p0,n) {
 
   delta <- n*(log(det(Sigma)))+
            psych::tr((t(H)%*%kronecker(diag(n),solve(Sigma))%*%H)%*%
-                      t(H0)%*%kronecker(diag(n),solve(Sigma0))%*%H0)
+                     solve(H0)%*%kronecker(diag(n),solve(Sigma0))%*%t(solve(H0)))
 
   return(delta)
 

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\n\nlibrary(devtools)\ninstall_github(\"alejandrosanchezbecerra/Econometrics-IV/PS5/hurvichtsai\")\n\nlibrary('hurvichtsai')\nstore_example1 <- do.call(replicate_results,example1(Nsim=5000))\nstore_example1\nstore_example2 <- do.call(replicate_results,example2(Nsim=5000))\nstore_example2\n\nstore_example1$table_data/5000\nstore_example2$table_data/5000\n",
+    "created" : 1489995357211.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2767287016",
+    "id" : "4B5119F6",
+    "lastKnownWriteTime" : 1490021433,
+    "last_content_update" : 1490021433927,
+    "path" : "C:/Users/mmm/Dropbox/UPenn/722 - Econometrics IV/Problem Sets/PS5/Replication File.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

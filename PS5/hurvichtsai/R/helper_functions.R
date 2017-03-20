@@ -86,7 +86,7 @@ mle_VAR <- function(data,m,p,n,NumLags) {
   # USE VAR as initial guess to speed up.
   model_VAR  <- vars::VAR(as.data.frame(data[(NumLags-p+1):(n+NumLags),]),
                           p = p,type="none")
-  beta       <- t(Bcoef(model_VAR))
+  beta       <- t(vars::Bcoef(model_VAR))
 
   # Bmat <- matrix(0,2,2)
   # Bmat[lower.tri(Bmat,diag=TRUE)] <- NA
@@ -220,8 +220,16 @@ get_param_vec <- function(beta,Sigma) {
 
 }
 
-
-
+#' Title
+#'
+#' @param Phi
+#' @param m
+#' @param p
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Phi_to_Beta <- function(Phi,m,p) {
 
   beta  <- matrix(0,0,m)
@@ -235,13 +243,23 @@ Phi_to_Beta <- function(Phi,m,p) {
   return(beta)
 }
 
+#' Title
+#'
+#' @param beta
+#' @param m
+#' @param p
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Beta_to_Phi <- function(beta,m,p) {
 
   Phi <- list()
 
   order <- 1
   while ( order <= p ) {
-    Phi[[order]] <- t(beta[(order*(m-1)+1):(order*m),1:m])
+    Phi[[order]] <- t(beta[(m*(order-1)+1):(order*m),1:m])
     order        <- order+1
   }
 
@@ -249,18 +267,33 @@ Beta_to_Phi <- function(beta,m,p) {
 }
 
 
+#' Title
+#'
+#' @param Phi
+#' @param m
+#' @param p
+#' @param n
+#'
+#' @return
+#' @export
+#'
+#' @examples
 construct_H <- function(Phi,m,p,n) {
 
   H <- matrix(0,m*n,m*n)
   stacked_Phi <- matrix(NA,0,m)
 
+  Phi
+
   for(i in n:1){
+
+    # print(i)
 
     if( i == n) {
       stacked_Phi <- diag(m)
     } else {
       if( n-i <= p ) {
-        stacked_Phi <- rbind(stacked_Phi,-Phi0[[n-i]])
+        stacked_Phi <- rbind(stacked_Phi,-Phi[[n-i]])
       } else {
         stacked_Phi <- rbind(stacked_Phi,matrix(0,m,m))
       }

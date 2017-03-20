@@ -49,10 +49,13 @@ replicate_results <- function(Phi0,Sigma0,n,Nsim,m,p0,NumLags) {
     }
   }
 
-  delta_expected <- colMeans(delta)
   table_data     <- select_model(results,NumLags)
 
+  delta_expected <- colMeans(delta)
+  table_figure   <- rbind(apply(results, c(3,2), mean),
+                          delta_expected)
+
   return(list(table_data = table_data,
-              figue_data = delta_expected))
+              figue_data = table_figure))
 
 }
