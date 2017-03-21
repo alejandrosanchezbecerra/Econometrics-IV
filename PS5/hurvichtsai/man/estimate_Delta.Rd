@@ -2,14 +2,28 @@
 % Please edit documentation in R/selection_criteria.R
 \name{estimate_Delta}
 \alias{estimate_Delta}
-\title{Title}
+\title{Compute E[Delta(hat{beta},hat{Sigma})].}
 \usage{
 estimate_Delta(Phi, Sigma, Phi0, Sigma0, m, p, p0, n)
 }
 \arguments{
-\item{n}{}
+\item{Phi}{Estimated Phi, p-list with mxm transition matrices.}
+
+\item{Sigma}{Estimated Sigma, mxm matrix with covariance matrix}
+
+\item{Phi0}{True Phi, p-list with mxm transition matrices.}
+
+\item{Sigma0}{True Sigma, mxm matrix with covariance matrix}
+
+\item{m}{Number of dimensions of multivariate time series.}
+
+\item{p}{Order of estimated VAR(p)}
+
+\item{p0}{Order of true VAR(p0)}
+
+\item{n}{Number of observations}
 }
 \description{
-Title
+Compute E[Delta(hat{beta},hat{Sigma})].
 }
 

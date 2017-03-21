@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#==============================================================================#\n#===================== 0. SETUP WORKING ENVIRONMENT #==========================#\n#==============================================================================#\n\nsetwd('C:/Users/mmm/Dropbox/UPenn/722 - Econometrics IV/Problem Sets/PS5')\n\n# Install package from GITHUB\nlibrary(devtools)\ninstall_github(\"alejandrosanchezbecerra/Econometrics-IV/PS5/hurvichtsai\")\n\n# Load libraries\nlibrary('hurvichtsai')\nlibrary('xtable')\nlibrary('ggplot2')\nlibrary('reshape2')\nlibrary('tikzDevice')\n\n#==============================================================================#\n#====================== 1. RUN PACKAGE ========================================#\n#==============================================================================#\n\nstore_example1 <- do.call(replicate_results,example1(Nsim=5000))\nstore_example1\nstore_example2 <- do.call(replicate_results,example2(Nsim=5000))\nstore_example2\n\n#==============================================================================#\n#====================== 2. OUTPUT RESULTS =====================================#\n#==============================================================================#\n\n\n# Replicate Table 1\ntable1           <- store_example1$table_data/5000\ncolnames(table1) <- c(1,2,3,4,5,6)\nrownames(table1) <- c(\"$AIC$\",\"$AIC_c$\",\"$AIC_c^{BD}$\",\"$SIC$\")\n\nprint.xtable(xtable(table1),file=\"table1.tex\",\n             floating = FALSE, latex.environments = \"\",\n             sanitize.text.function=function(x){x})\n\n# Replicate Table 2\ntable2           <- store_example2$table_data/5000\ncolnames(table2) <- c(1,2,3,4,5,6)\nrownames(table2) <- c(\"$AIC$\",\"$AIC_c$\",\"$AIC_c^{BD}$\",\"$SIC$\")\n\nprint.xtable(xtable(table2),file=\"table2.tex\",\n             floating = FALSE, latex.environments = \"\",\n             sanitize.text.function=function(x){x})\n\n# Replicate Figure 1\n\nfigure1_data <- as.data.frame(t(store_example1$figue_data))\ncolnames(figure1_data) <- c(\"$AIC$\",\"$AIC_c$\",\"$AIC_c^{BD}$\",\n                            \"$SIC$\",\"$E[\\\\Delta]$\")\nfigure1_data$p <- 1:6\nfigure1_data.melted <- melt(figure1_data, id=\"p\")\n\nrequire('tikzDevice')\ntikz('figure1.tex',width = 6,height = 3) # Dimensions in cm\n  qplot(x=p, y=value, color=variable, data=figure1_data.melted, geom=\"line\")\ndev.off()\n\n# Replicate Figure 2\n\nfigure2_data <- as.data.frame(t(store_example2$figue_data))\ncolnames(figure2_data) <- c(\"$AIC$\",\"$AIC_c$\",\"$AIC_c^{BD}$\",\n                            \"$SIC$\",\"$E[\\\\Delta]$\")\n\nfigure2_data$p <- 1:6\nfigure2_data.melted <- melt(figure2_data, id=\"p\")\n\nrequire('tikzDevice')\ntikz('figure2.tex',width = 6,height = 3) # Dimensions in cm\n  qplot(x=p, y=value, color=variable, data=figure2_data.melted, geom=\"line\")\ndev.off()\n\n",
+    "created" : 1489995357211.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3492733130",
+    "id" : "4B5119F6",
+    "lastKnownWriteTime" : 1490116252,
+    "last_content_update" : 1490116294167,
+    "path" : "C:/Users/mmm/Dropbox/UPenn/722 - Econometrics IV/Problem Sets/PS5/Replication File.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

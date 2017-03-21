@@ -20,9 +20,16 @@ replicate_results(Phi0, Sigma0, n, Nsim, m, p0, NumLags)
 \item{NumLags}{Maximum number of lag-order for evaluation}
 }
 \value{
-A list with tables summarizing the results.
+A list of two tables summarizing the results. The first computes the
+frequency with which each model order is selected. The second computes the
+average
 }
 \description{
 Replicate the results in Hurvich and Tsai
+}
+\examples{
+do.call(replicate_results,example1(Nsim=100))
+do.call(replicate_results,example2(Nsim=100))
+
 }
 

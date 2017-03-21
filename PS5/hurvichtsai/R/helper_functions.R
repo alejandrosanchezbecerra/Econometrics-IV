@@ -57,6 +57,22 @@ lik_VAR <- function(param,Y,X,p,m,n) {
 
 }
 
+#' Compute concentrated log-likelihood
+#'
+#' @param Sigma_vec Vector of cholesky-decomposition of Sigma
+#' @param beta matrix of coefficients
+#' @param Y Dependent variable
+#' @param X Regressor matrix with lags
+#' @param p Lag order
+#' @param m Number of dimensions
+#' @param n NUmber of observations
+#'
+#' @return log-likelihood + constant. Note that beta is not conditional on Sigma,
+#' because the formula for beta does not depend on the estimate of Sigma (as
+#' proved in Hamilton)
+#' @export
+#'
+#' @examples
 conc_lik_VAR <- function(Sigma_vec,beta,Y,X,p,m,n) {
 
   Sigma <- get_Sigma(Sigma_vec,m)
@@ -74,7 +90,8 @@ conc_lik_VAR <- function(Sigma_vec,beta,Y,X,p,m,n) {
 #' @param p Order of VAR(p)
 #' @param NumLags Maximum number of lags set to zero in pre-data observations.
 #'
-#' @return
+#' @return List with (mp x m) matrix of betas and (mxm) matrix Sigma MLE
+#' estiamtes.
 #' @export
 #'
 #' @examples
@@ -88,40 +105,12 @@ mle_VAR <- function(data,m,p,n,NumLags) {
                           p = p,type="none")
   beta       <- t(vars::Bcoef(model_VAR))
 
-  # Bmat <- matrix(0,2,2)
-  # Bmat[lower.tri(Bmat,diag=TRUE)] <- NA
-  # Sigma <- SVAR(model_VAR,estmethod="direct",Amat=diag(2),Bmat=Bmat)$Sigma.U/100
-
-  # beta_guess <- cbind(model_VAR$varresult$V1$coefficients,
-  #                   model_VAR$varresult$V2$coefficients)
-  # Sigma_guess <- summary(model_VAR)$covres
-  # init_guess <- get_param_vec(beta = beta_guess,Sigma = Sigma_guess )
-
-#  init_guess <- get_param_vec(beta = matrix(0,m^2,p),
-#                              Sigma = diag(m) )
-
   init_guess <- get_Sigma_vec(Sigma=summary(model_VAR)$covres)
   model     <- optim(par=init_guess,
                      fn=function(Sigma) {conc_lik_VAR(Sigma,beta,Y,X,p,m,n)},
                      method="L-BFGS-B")
   est_coef  <- model$par
   Sigma     <- get_Sigma(est_coef,m)
-
-  # ls(summary(vars::VAR(as.data.frame(data[(NumLags-p+2):(n+NumLags+1),]),
-  #          p = p,type="none")))
-
-  # summary(vars::VAR(as.data.frame(data[(NumLags-p+1):(n+NumLags),]),
-  #                  p = p,type="none"))$corres
-
-  #model     <- optim(par=init_guess,
-  #                   fn=function(par) {lik_VAR(par,Y,X,p,m,n)},
-  #                   method="L-BFGS-B")
-  #est_coef  <- model$par
-  #param     <- get_parameters(est_coef,p,m)
-
-  # grad(function(par) {lik_VAR(par,Y,X,p,m,n)},est_coef)
-
-  # return(param)
 
   return(list(beta=beta,
               Sigma=Sigma))
@@ -179,6 +168,15 @@ get_parameters <- function(param,p,m) {
 
 }
 
+#' Compute Sigma matrix from a vector of Cholesky-decomposed values
+#'
+#' @param Sigma_vec m(m+1)/2 vector of parameters
+#' @param m Number of dimensions
+#'
+#' @return mxm matrix
+#' @export
+#'
+#' @examples
 get_Sigma <- function(Sigma_vec,m) {
 
   cholSigma <- matrix(0,m,m)
@@ -189,6 +187,14 @@ get_Sigma <- function(Sigma_vec,m) {
 
 }
 
+#' Compute Vector of Cholesky coefficients for Sigma matrix
+#'
+#' @param Sigma mxm covariance matrix
+#'
+#' @return m(m+1)/2 vector of coefficients from the Cholesky decomposition
+#' @export
+#'
+#' @examples
 get_Sigma_vec <- function(Sigma) {
 
   Sigma <- Sigma
@@ -220,13 +226,13 @@ get_param_vec <- function(beta,Sigma) {
 
 }
 
-#' Title
+#' Convert list of Phi matrices to stacked matrix beta
 #'
-#' @param Phi
-#' @param m
-#' @param p
+#' @param Phi List with p elements, each is an mxm matrix
+#' @param m Number of dimensions
+#' @param p Lag order
 #'
-#' @return
+#' @return Stacked matrix of coefficients.
 #' @export
 #'
 #' @examples
@@ -243,13 +249,13 @@ Phi_to_Beta <- function(Phi,m,p) {
   return(beta)
 }
 
-#' Title
+#' Convert a stacked matrix of parameters beta to a list of matrices Phi
 #'
-#' @param beta
-#' @param m
-#' @param p
+#' @param beta (mp x m) matrix of coefficients
+#' @param m Number of dimensions
+#' @param p Lag order
 #'
-#' @return
+#' @return List with p elements, of (m x m) Phi matrices
 #' @export
 #'
 #' @examples
@@ -267,14 +273,14 @@ Beta_to_Phi <- function(beta,m,p) {
 }
 
 
-#' Title
+#' Construct an H function (as defined in Hurvich and Tsai (1993))
 #'
-#' @param Phi
-#' @param m
-#' @param p
-#' @param n
+#' @param Phi List with p elements. Each contains a transition matrix
+#' @param m Number of dimensions
+#' @param p Lag order
+#' @param n Number of observations
 #'
-#' @return
+#' @return (mn x mn) matrix H
 #' @export
 #'
 #' @examples
@@ -306,8 +312,3 @@ construct_H <- function(Phi,m,p,n) {
   return(H)
 
 }
-
-# hola <- example2()
-# hola$Phi0
-
-# Phi_to_Beta(hola$Phi0,hola$m,hola$p)

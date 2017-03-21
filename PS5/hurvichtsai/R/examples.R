@@ -1,4 +1,6 @@
-#' Title
+#' Parameters required for Example 1
+#'
+#' @param Nsim Number of simulations
 #'
 #' @return
 #' @export
@@ -21,7 +23,9 @@ example1 <- function(Nsim) {
 
 }
 
-#' Title
+#' Parameters required for Example 2
+#'
+#' @param Nsim Number of simulations
 #'
 #' @return
 #' @export

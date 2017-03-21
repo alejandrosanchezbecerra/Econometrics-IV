@@ -25,6 +25,16 @@ criteria_func <- function(Sigma,m,n,p){
 
 }
 
+#' Compute frequency of selected criteria
+#'
+#' @param results (Nsim x NumLags x 4) array with computed criteria
+#' @param NumLags Maximum number of lags considered for evaluation
+#'
+#' @return 4 x NumLags matrix with AIC,AICc, AICcBD and SIC criteria,
+#' on each row, respectively.
+#' @export
+#'
+#' @examples
 select_model <- function(results,NumLags) {
 
   select_model  <- matrix(NA,4,NumLags)
@@ -38,16 +48,16 @@ select_model <- function(results,NumLags) {
 
 }
 
-#' Title
+#' Compute E[Delta(hat{beta},hat{Sigma})].
 #'
-#' @param Phi
-#' @param Sigma
-#' @param Phi0
-#' @param Sigma0
-#' @param m
-#' @param p
-#' @param p0
-#' @param n
+#' @param Phi   Estimated Phi, p-list with mxm transition matrices.
+#' @param Sigma Estimated Sigma, mxm matrix with covariance matrix
+#' @param Phi0  True Phi, p-list with mxm transition matrices.
+#' @param Sigma0 True Sigma, mxm matrix with covariance matrix
+#' @param m Number of dimensions of multivariate time series.
+#' @param p Order of estimated VAR(p)
+#' @param p0 Order of true VAR(p0)
+#' @param n Number of observations
 #'
 #' @return
 #' @export

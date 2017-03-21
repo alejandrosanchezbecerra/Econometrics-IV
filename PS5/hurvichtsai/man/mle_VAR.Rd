@@ -15,6 +15,10 @@ mle_VAR(data, m, p, n, NumLags)
 
 \item{NumLags}{Maximum number of lags set to zero in pre-data observations.}
 }
+\value{
+List with (mp x m) matrix of betas and (mxm) matrix Sigma MLE
+estiamtes.
+}
 \description{
 Obtain maximum likelihood estimate
 }
