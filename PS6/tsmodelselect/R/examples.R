@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-example1 <- function(Nsim) {
+example1_PS6 <- function(Nsim) {
 
   config           <- list()
   config$Sigma0    <- matrix(1,1,1)
@@ -32,7 +32,7 @@ example1 <- function(Nsim) {
 #' @export
 #'
 #' @examples
-example2 <- function(Nsim) {
+example2_PS6 <- function(Nsim) {
 
   config            <- list()
   config$Sigma      <- matrix(1,1,1)
