@@ -4,7 +4,7 @@
 \alias{sample_dataAR}
 \title{Title}
 \usage{
-sample_dataAR(Phi0, Sigma0, p, m, n, ...)
+sample_dataAR(Phi0, Sigma0, p0, m, n, ...)
 }
 \arguments{
 \item{...}{}
