@@ -4,7 +4,7 @@
 \alias{example1_PS6}
 \title{Parameters required for Example 1}
 \usage{
-example1_PS6(Nsim)
+example1_PS6(Nsim, n)
 }
 \arguments{
 \item{Nsim}{Number of simulations}

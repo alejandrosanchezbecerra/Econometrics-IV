@@ -32,7 +32,7 @@ criteria_func <- function(Sigma,n,p){
 #' @examples
 select_model <- function(results,NumLags) {
 
-  select_model  <- matrix(NA,2,NumLags)
+  select_model  <- matrix(NA,3,NumLags)
   max_criterion <- apply(results, c(3,1), min)
   min_array     <- aperm(sapply(rep(0,NumLags),
                                 function(x) max_criterion,simplify='array'),
